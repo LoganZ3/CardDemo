@@ -1,0 +1,16 @@
+from playing_card import Deck
+
+# Create a new deck
+deck = Deck()
+print(len(deck.cards))  # Should print 52
+
+# Shuffle the deck
+deck.shuffle()
+print(deck.cards[:5])  # Print the first 5 cards to see if they are shuffled
+
+# Draw a card
+drawn_card = deck.draw_card()
+print(drawn_card)  # Should print something like "7 of Hearts"
+
+# Check that the deck size decreased
+print(len(deck.cards))  # Should print 51
