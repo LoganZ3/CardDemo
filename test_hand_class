@@ -1,0 +1,23 @@
+import unittest
+from playing_card import PlayingCard, Deck, Hand
+class TestHand(unittest.TestCase):
+
+    def test_add_card_to_hand(self):
+        hand = Hand()
+        card = PlayingCard("K", "Spades")
+        hand.add_card(card)
+        self.assertEqual(len(hand.cards), 1)
+
+    def test_display_hand(self):
+        hand = Hand()
+        card1 = PlayingCard("A", "Spades")
+        card2 = PlayingCard("10", "Hearts")
+        hand.add_card(card1)
+        hand.add_card(card2)
+        self.assertEqual(hand.display_hand(), "A of Spades, 10 of Hearts")
+
+    def test_hand_card_count(self):
+        hand = Hand()
+        hand.add_card(PlayingCard("Q", "Diamonds"))
+        hand.add_card(PlayingCard("7", "Clubs"))
+        self.assertEqual(hand.card_count(), 2)
