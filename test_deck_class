@@ -1,16 +1,27 @@
-from playing_card import Deck
+import unittest
+from playing_card import PlayingCard, Deck, Hand
 
-# Create a new deck
-deck = Deck()
-print(len(deck.cards))  # Should print 52
+class TestDeck(unittest.TestCase):
 
-# Shuffle the deck
-deck.shuffle()
-print(deck.cards[:5])  # Print the first 5 cards to see if they are shuffled
+    def test_deck_creation(self):
+        deck = Deck()
+        self.assertEqual(len(deck.cards), 52)
 
-# Draw a card
-drawn_card = deck.draw_card()
-print(drawn_card)  # Should print something like "7 of Hearts"
+    def test_deck_shuffling(self):
+        deck = Deck()
+        original_order = deck.cards[:]  # Copy the original order
+        deck.shuffle()
+        self.assertNotEqual(deck.cards, original_order)  # Should be different after shuffle
 
-# Check that the deck size decreased
-print(len(deck.cards))  # Should print 51
+    def test_draw_card(self):
+        deck = Deck()
+        card = deck.draw_card()
+        self.assertIsInstance(card, PlayingCard)
+        self.assertEqual(len(deck.cards), 51)  # After drawing, deck size should be 51
+
+    def test_empty_deck_draw(self):
+        deck = Deck()
+        for _ in range(52):  # Draw all cards
+            deck.draw_card()
+        self.assertIsNone(deck.draw_card())  # Deck should be empty, return None
+
